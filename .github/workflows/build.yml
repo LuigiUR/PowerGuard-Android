@@ -15,8 +15,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Compila APK
-        run: gradle assembleDebug
+      - name: Installa Gradle 8.7 e Compila APK
+        run: |
+          curl -sL https://services.gradle.org/distributions/gradle-8.7-bin.zip -o gradle.zip
+          unzip -q gradle.zip -d /opt/gradle
+          /opt/gradle/gradle-8.7/bin/gradle assembleDebug --no-daemon
       - name: Carica APK pronto
         uses: actions/upload-artifact@v4
         with:
